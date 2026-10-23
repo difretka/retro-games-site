@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro MK Arcade - Play Free</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff3333;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        #game-container {
+            width: 100%;
+            height: 550px;
+            background: #000;
+            border: 3px solid #333;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .game-list {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>RETRO ARCADE</h1>
+        <p>Play classic retro fighters right in your browser!</p>
+
+        <!-- Game Selection Buttons -->
+        <div class="game-list">
+            <button onclick="loadGame('URL_TO_MK1_ROM.zip', 'segaMD')">Mortal Kombat 1</button>
+            <button onclick="loadGame('URL_TO_MK2_ROM.zip', 'segaMD')">Mortal Kombat II</button>
+            <button onclick="loadGame('URL_TO_UMK3_ROM.zip', 'snes')">Ultimate MK 3</button>
+        </div>
+
+        <!-- Emulator Screen -->
+        <div id="game-container">
+            <div id="emulator" style="width:100%;height:100%;"></div>
+        </div>
+    </div>
+
+    <!-- EmulatorJS Script Loader -->
+    <script>
+        function loadGame(gameUrl, coreSystem) {
+            // Clear previous instance if any
+            document.getElementById('emulator').innerHTML = '';
+
+            window.EJS_player = '#emulator';
+            window.EJS_gameUrl = gameUrl; 
+            window.EJS_core = coreSystem; 
+            window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+
+            // Dynamically load the EmulatorJS script
+            let script = document.createElement('script');
+            script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
+            document.getElementById('emulator').appendChild(script);
+        }
+    </script>
+
+</body>
+</html>
